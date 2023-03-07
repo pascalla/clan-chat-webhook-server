@@ -43,7 +43,9 @@ fastify.post('/webhook', async (request, reply) => {
     lock.acquire('lock', function() {
         console.log('lock aqcuired');
         const message = JSON.parse(request.body.data);
-        const hash = crypto.createHash('sha1').update(request.body.data).digest('base64');
+        const hash = crypto.createHash('sha1')
+            .update(message.author + "-" + message.content + "-" + message.timestamp.slice(0, -2))
+            .digest('base64');
 
         console.log(request.body.data);
 
