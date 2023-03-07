@@ -45,7 +45,7 @@ fastify.post('/webhook', async (request, reply) => {
         const message = JSON.parse(request.body.data);
         const hash = crypto.createHash('sha1').update(request.body.data).digest('base64');
 
-        console.log(hash);
+        console.log(request.body.data);
 
         let chatExists = getChat.get(hash);
         if(chatExists) {
