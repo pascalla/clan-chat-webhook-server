@@ -42,11 +42,18 @@ const setChat = db.prepare("INSERT INTO chat (hash, timestamp) VALUES (@hash, @t
 fastify.post('/webhook', async (request, reply) => {
     lock.acquire('lock', function() {
         console.log('lock aqcuired');
-        const message = JSON.parse(request.body.data);
-        message.timestamp = message.timestamp.splice(0, -2);
-        const hash = crypto.createHash('sha1').update(request.body.data).digest('base64');
 
-        console.log(request.body.data);
+        let message;
+        let hash;
+
+        try {
+            message = JSON.parse(request.body.data);
+            const hashString = message.author + message.content + message.timestamp.toString().splice(0, -2);
+            hash = crypto.createHash('sha1').update(hashString).digest('base64');
+        } catch(e) {
+            console.log(e);
+        }
+
 
         let chatExists = getChat.get(hash);
         if(chatExists) {
