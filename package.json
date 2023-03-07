@@ -1,0 +1,29 @@
+{
+  "name": "clan-chat-webhook-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pascalla/clan-chat-webhook-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pascalla/clan-chat-webhook-server/issues"
+  },
+  "homepage": "https://github.com/pascalla/clan-chat-webhook-server#readme",
+  "dependencies": {
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/multipart": "^7.4.1",
+    "async-lock": "^1.4.0",
+    "axios": "^1.3.4",
+    "better-sqlite3": "^8.1.0",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.13.0"
+  }
+}
