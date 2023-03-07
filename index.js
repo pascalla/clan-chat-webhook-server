@@ -43,11 +43,13 @@ fastify.post('/webhook', async (request, reply) => {
     lock.acquire('lock', function() {
         console.log('lock aqcuired');
         const message = JSON.parse(request.body.data);
+        console.log(message.content);
+        console.log(message.author);
+        console.log(message.timestamp.slice(0, -2));
+
         const hash = crypto.createHash('sha1')
             .update(message.author + "-" + message.content + "-" + message.timestamp.slice(0, -2))
             .digest('base64');
-
-        console.log(request.body.data);
 
         let chatExists = getChat.get(hash);
         if(chatExists) {
@@ -68,13 +70,11 @@ fastify.post('/webhook', async (request, reply) => {
             messageToSend = `**${message.author}**: ${message.content}`
         }
 
-        setTimeout(() => {
-            axios.post(process.env.WEBHOOK_URL, {
-                content: messageToSend
-            }).then((res) => {
-                return { dupe: 'false'}
-            })
-        }, 100);
+        axios.post(process.env.WEBHOOK_URL, {
+            content: messageToSend
+        }).then((res) => {
+            return { dupe: 'false'}
+        })
     }, function(err, ret) {
         console.log('lock released');
     });
