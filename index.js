@@ -45,6 +45,8 @@ fastify.post('/webhook', async (request, reply) => {
         const message = JSON.parse(request.body.data);
         const hash = crypto.createHash('sha1').update(request.body.data).digest('base64');
 
+        console.log(hash);
+
         let chatExists = getChat.get(hash);
         if(chatExists) {
             return { dupe: 'true'};
@@ -70,7 +72,7 @@ fastify.post('/webhook', async (request, reply) => {
             }).then((res) => {
                 return { dupe: 'false'}
             })
-        }, 500);
+        }, 100);
     }, function(err, ret) {
         console.log('lock released');
     });
