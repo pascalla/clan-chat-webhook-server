@@ -10,7 +10,7 @@ dotenv.config();
 
 // Require the framework and instantiate it
 const fastify = Fastify({
-    logger: true
+    logger: false
 })
 
 import Database from 'better-sqlite3';
@@ -64,11 +64,13 @@ fastify.post('/webhook', async (request, reply) => {
             messageToSend = `**${message.author}**: ${message.content}`
         }
 
-        axios.post(process.env.WEBHOOK_URL, {
-            content: messageToSend
-        }).then((res) => {
-            return { dupe: 'false'}
-        })
+        setTimeout(() => {
+            axios.post(process.env.WEBHOOK_URL, {
+                content: messageToSend
+            }).then((res) => {
+                return { dupe: 'false'}
+            })
+        }, 500);
     }, function(err, ret) {
         console.log('lock released');
     });
