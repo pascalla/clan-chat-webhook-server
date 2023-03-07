@@ -76,7 +76,7 @@ fastify.post('/webhook', async (request, reply) => {
 
 const start = async () => {
     try {
-        await fastify.listen({port: process.env.APPLICATION_PORT})
+        await fastify.listen({port: process.env.APPLICATION_PORT, host: '0.0.0.0'})
     } catch (err) {
         fastify.log.error(err)
         process.exit(1)
