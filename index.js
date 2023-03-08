@@ -41,8 +41,6 @@ const setChat = db.prepare("INSERT INTO chat (hash, timestamp) VALUES (@hash, @t
 // Declare a route
 fastify.post('/webhook', async (request, reply) => {
     lock.acquire('lock', function() {
-        console.log('lock aqcuired');
-
         let message;
         let hash;
         let hashString;
@@ -92,7 +90,7 @@ fastify.post('/webhook', async (request, reply) => {
             })
         }, 100);
     }, function(err, ret) {
-        console.log('lock released');
+
     });
 })
 
