@@ -45,10 +45,15 @@ fastify.post('/webhook', async (request, reply) => {
 
         let message;
         let hash;
+        let hashString;
 
         try {
             message = JSON.parse(request.body.data);
-            const hashString = message.author + message.content + message.timestamp.toString().substring(0, message.timestamp.toString().length -2);
+            if(!!message.author) {
+                hashString = message.author + message.content + message.timestamp.toString().substring(0, message.timestamp.toString().length - 2);
+            } else {
+                hashString = message.content + message.timestamp.toString().substring(0, message.timestamp.toString().length - 2);
+            }
             hash = crypto.createHash('sha1').update(hashString).digest('base64');
         } catch(e) {
             console.log(e);
