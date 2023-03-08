@@ -72,6 +72,11 @@ fastify.post('/webhook', async (request, reply) => {
             messageToSend = message.content;
         } else {
             messageToSend = `**${message.author}**: ${message.content}`
+
+            messageToSend.replace('<img=0>', '<:Player_moderator_emblem:1082981033340833804>')
+            messageToSend.replace('<img=2>', '<:Ironman_chat_badge:1082980848200065034>')
+            messageToSend.replace('<img=3>', '<:Hardcore_group_ironman_chat_badg:1082981031315001344>')
+            messageToSend.replace('<img=4>', '<:Ultimate_ironman_chat_badge:1082980849571602532>')
         }
 
         setTimeout(() => {
