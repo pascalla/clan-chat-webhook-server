@@ -87,7 +87,7 @@ fastify.post('/webhook', async (request, reply) => {
             messageToSend = messageToSend.replace('<img=141>', '')
             messageToSend = messageToSend.replace('<img=232>', '')
 
-            messageToSend = messageToSend.replace(/(<([^>]+)>)/gi, '')
+            messageToSend = messageToSend.replace(/(<([^:>]+)>)/gi, '')
         }
 
         setTimeout(() => {
