@@ -82,6 +82,11 @@ fastify.post('/webhook', async (request, reply) => {
             messageToSend = messageToSend.replace('<img=11>', '<:Ultimate_ironman_chat_badge:1082980849571602532> ')
             messageToSend = messageToSend.replace('<img=41>', '<:Group_ironman_chat_badge:1082980845024985128> ')
             messageToSend = messageToSend.replace('<img=43>', '<:Unranked_group_ironman_chat_badg:1082981035068895302> ')
+
+            // remove system icons
+            messageToSend = messageToSend.replace('<img=141>', '')
+            messageToSend = messageToSend.replace('<img=232>', '')
+
             messageToSend = messageToSend.replace(/(<([^>]+)>)/gi, '')
         }
 
